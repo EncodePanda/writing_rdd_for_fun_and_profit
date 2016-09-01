@@ -5,6 +5,13 @@ import org.apache.spark.rdd._
 
 import scala.util.Random._
 
+object RandomRDD {
+  implicit class SparkContextOps(sc: SparkContext) {
+    def random(maxSize: Int = 100, numPartitions: Int = 2): RandomRDD =
+      new RandomRDD(sc, maxSize, numPartitions)
+  }
+}
+
 class RandomRDD(_sc: SparkContext, maxSize: Int = 100, numPartitions: Int = 2) extends RDD[Int](_sc, Nil) {
 
   override def compute(split: Partition, context: TaskContext): Iterator[Int] =
