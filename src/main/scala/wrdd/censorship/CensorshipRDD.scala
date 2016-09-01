@@ -3,7 +3,7 @@ package wrdd.censorship
 import org.apache.spark._
 import org.apache.spark.rdd._
 
-class CensorshipRDD(prev: RDD[String]) extends RDD[String](prev.context, List(new OneToOneDependency(prev))) {
+class CensorshipRDD(prev: RDD[String]) extends RDD[String](prev) {
 
   override def compute(split: Partition, context: TaskContext): Iterator[String] = ???
 
